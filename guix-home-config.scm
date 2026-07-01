@@ -16,7 +16,8 @@
                    `((".guile" ,%default-dotguile)
                      (".Xdefaults" ,%default-xdefaults)
                      (".bash_profile" ,(plain-file "bash-profile"
-"export GUIX_PROFILE=\"$HOME/.guix-profile\"\nexport XDG_DATA_DIRS=\"${XDG_DATA_DIRS:-/usr/local/share:/usr/share}:$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share\"\nexport PATH=\"$HOME/.local/bin:$PATH\"\n\n# \nif [ -f ~/.bashrc ]; then\n  . ~/.bashrc\nfi\n"))))
+"export GUIX_PROFILE=\"$HOME/.guix-profile\"\nexport XDG_DATA_DIRS=\"${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
+:$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share\"\nexport PATH=\"$HOME/.local/bin:$PATH\"\n\n# \nif [ -f ~/.bashrc ]; then\n  . ~/.bashrc\nfi\n"))))
 
           (service home-xdg-configuration-files-service-type
                    `(("gdb/gdbinit" ,%default-gdbinit)
