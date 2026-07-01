@@ -1,29 +1,40 @@
-(define-module (guix-home-config)
-  #:use-module (gnu home)
-  #:use-module (gnu home services)
-  #:use-module (gnu services)
-  #:use-module (gnu system shadow)
-  #:use-module (guix gexp)
-  #:use-module (gnu packages package-management)
-  #:use-module (gnu packages text-editors))
+(use-modules (gnu home)
+             (gnu home services)
+             (gnu home services shells)
+             (gnu packages shells)
+             (gnu packages bash)
+             (guix gexp)
+	     (gnu packages)
+             (gnu system shadow)
+             (gnu packages admin))
 
-(define home-config
-  (home-environment
-    (services
-      (append
-        (list          
-          (service home-files-service-type
-                   `((".guile" ,%default-dotguile)
-                     (".Xdefaults" ,%default-xdefaults)
-                     (".bash_profile" ,(plain-file "bash-profile"
-"export GUIX_PROFILE=\"$HOME/.guix-profile\"\nexport XDG_DATA_DIRS=\"${XDG_DATA_DIRS:-/usr/local/share:/usr/share}
-:$HOME/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share\"\nexport PATH=\"$HOME/.local/bin:$PATH\"\n\n# \nif [ -f ~/.bashrc ]; then\n  . ~/.bashrc\nfi\n"))))
+(home-environment
+ (packages (list pfetch))
+ (services
+  (list
+   (service home-bash-service-type
+            (home-bash-configuration
+             (bashrc
+              (list
+               (plain-file "bashrc"
+                    "PS1='(¬\\`‸´¬)# '
+echo \"Hare Hare Krishna Krishna\"
+printf \"%s\n\"
+pfetch")))))
 
-          (service home-xdg-configuration-files-service-type
-                   `(("gdb/gdbinit" ,%default-gdbinit)
-                     ("nano/nanorc" ,%default-nanorc))))
+   (service home-files-service-type
+            `((".config/nano/nanorc" ,(plain-file "nanorc" "set linenumbers set mouse set tabsize 4")))))))
 
-        %base-home-services))))
-
-home-config
-
+(home-environment
+ (packages (specifications->packages
+            (list
+	     "flameshot"
+	     "pfetch"
+	     "flatpak"
+	     "rofi"
+	     "wine"
+	     "steam"
+	     "alacritty"
+	     "7zip"
+	     "unrar"
+	     ))))
