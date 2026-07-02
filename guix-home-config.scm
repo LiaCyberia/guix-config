@@ -37,4 +37,6 @@ pfetch")))))
 	     "alacritty"
 	     "7zip"
 	     "unrar"
+		 "gamin"
+		 "ncurses"
 	     ))))
